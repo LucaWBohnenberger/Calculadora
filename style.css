@@ -1,0 +1,123 @@
+*{
+    background: #2b2b2b;
+}
+
+.calculadora{
+position: relative;
+width: 360px;
+height: 800px;
+background: linear-gradient(168.55deg, #C9C9C9 0%, #3D3D3D 100%);
+border: black 2px;
+}
+
+.botao{
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 25px 34px;
+gap: 10px;
+background: transparent;
+border: 0px;
+}
+
+#botaoAC{
+
+position: absolute;
+width: 90px;
+height: 90px;
+left: 0px;
+bottom: 360px;
+
+border-top: 0.5px solid #2B2B2B;
+}
+
+#botaopa{
+position: absolute;
+height: 90px;
+left: 90px;
+right: 180px;
+bottom: 360px;
+
+border-top: 0.5px solid #2B2B2B;
+}
+
+#botaoper{
+position: absolute;
+height: 90px;
+left: 180px;
+right: 90px;
+bottom: 360px;
+
+border-top: 0.5px solid #2B2B2B;
+}
+
+#botaomais{
+position: absolute;
+width: 90px;
+height: 90px;
+right: 0px;
+bottom: 360px;
+
+border-width: 0.5px 0px 0px 0.5px;
+border-style: solid;
+border-color: #2B2B2B;
+}
+
+#botao1{
+position: absolute;
+width: 90px;
+height: 90px;
+left: 0px;
+bottom: 270px;
+}
+
+#botao2{
+position: absolute;
+height: 90px;
+left: 90px;
+right: 180px;
+bottom: 270px;
+}
+
+#botao3{
+position: absolute;
+height: 90px;
+left: 180px;
+right: 90px;
+bottom: 270px;
+}
+
+#botaomenos{
+position: absolute;
+width: 90px;
+height: 90px;
+right: 0px;
+bottom: 270px;
+border-left: 0.5px solid #2B2B2B;
+}
+
+.botao4{
+position: absolute;
+width: 90px;
+height: 90px;
+left: 0px;
+bottom: 180px;
+}
+
+.botao5{
+position: absolute;
+height: 90px;
+left: 90px;
+right: 180px;
+bottom: 180px;
+}
+
+.botao6{
+position: absolute;
+height: 90px;
+left: 180px;
+right: 90px;
+bottom: 180px;
+}
