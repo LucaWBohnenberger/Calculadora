@@ -1,128 +1,161 @@
 function debug(){
-    console.log(calculoVerdadeiro)
-    console.log(calculoVerdadeiro2)
+
+
 }
 
 calculo1 = ""
 calculo2 = ""
-calculoVerdadeiro = ""
-calculoVerdadeiro2 = ""
-controle_calculo = true
-var vezes, menos, div, percent, parentese, mais, habilitador
-habilitador = true
+operacao = ""
+segurar_operacao = ""
+mudar_sinal = ""
 
 
 function atualizar(){
-    var mudar =  document.getElementById("numeros_grandes")
+    var mudar =  document.getElementById("numeros_pequenos")
     mudar.innerHTML = calculo1
-    var mudar2 = document.getElementById("numeros_pequenos")
-    mudar2.innerHTML = calculo2
+    mudar.innerHTML += operacao
+    var mudar =  document.getElementById("numeros_grandes")
+    mudar.innerHTML = ""
 }
 
 
 function addnumero(num){
-    calculo1 += String(num)
-    if (controle_calculo){
-        calculoVerdadeiro += String(num)
+    
+    var mudar =  document.getElementById("numeros_grandes")
+    if (operacao.length > 0){
+        calculo2 += String(num)
+        mudar.innerHTML = calculo2
+        console.log("calculo2")
+        console.log(calculo2)
+        console.log(typeof calculo2)
     }else{
-        calculoVerdadeiro2 += String(num)
+        calculo1 += String(num)
+        mudar.innerHTML = calculo1
+        console.log(calculo1)
     }
-    console.log(calculo1)
-    controle_por_fora = true
-    atualizar()
 }
 
 
 function apagar_tudo(){
     calculo1 = ""
     calculo2 = ""
-    calculoVerdadeiro = ""
+    operacao = ""
     atualizar()
 }
 
 function addvezes(){
-    if(habilitador){
-    calculo1 += "x"
-    calculo2 += calculo1
-    calculo1 = ""
-    mais = true
+    console.log(operacao.length)
+    if(operacao.length == 0 & calculo1.length > 0){
+    operacao = "x"
+    console.log(operacao.length)
+    atualizar()
     }else{
-        calcular()
+        segurar_operacao = "x"
+        calcular(false)
     }
 }
 
 function adddiv(){
-    if(habilitador){
-    calculo1 += "/"
-    calculo2 += calculo1
-    calculo1 = ""
-    div = true
+    if(operacao.length == 0 & calculo1.length > 0){
+    habilitador = false
+    operacao = "/"
+    atualizar()
     }else{
-    calcular()
+        segurar_operacao = "/"
+        calcular(false)
     }
 }
 
 function addpercent(){
-    if(habilitador){
-    calculo1 += "%"
-    calculo2 += calculo1
-    calculo1 = ""
-    percent =true
+    if(operacao.length == 0 & calculo1.length > 0){
+    habilitador = false
+    operacao = "%"
+    atualizar()
     }else{
-        calcular()
+        segurar_operacao = "%"
+        calcular(false)
     }
 }
 
 function addmais(){
-    if(habilitador){
-    calculo1 += "+"
-    calculo2 += calculo1
-    calculo1 = ""
-    mais = true
+    if(operacao.length == 0 & calculo1.length > 0){
+    operacao = "+"
+    atualizar()
     }else{
-        calcular()
+        segurar_operacao = "+"
+        calcular(false)
     }
 }
 
 function addmenos(){
-    if(habilitador){
-    calculo1 += "-"
-    calculo2 += calculo1
-    calculo1 = ""
-    menos = false
+    if(operacao.length == 0 & calculo1.length != 0){
+    operacao = "-"
+    console.log(operacao)
+    atualizar()
+    }else if(calculo1.length == 0) {
+        calculo1 += "-"
+        var mudar =  document.getElementById("numeros_grandes")
+        mudar.innerHTML = calculo1
     } else{
-        calcular()
+        segurar_operacao = "-"
+        atualizar()
+        calcular(false)
     }
 }
 
 function addponto(){
-    if (!calculo1.includes(".")){
-        calculo1 += "."
-    }
-}
-
-var controle = true
-var controle_por_fora = true
-
-function addpa(){
-    if (controle){
-        calculo1 += "("
-        controle = false
-        controle_por_fora = false
-
-    }else if (controle_por_fora) {
-        calculo1 += ")"
-        controle = true
-    }
-    atualizar()
+    if(operacao.length == 0){
+        if (!calculo1.includes(".")){
+            calculo1 += "."
+        }
+    } else{
+        if (!calculo2.includes(".")){
+            calculo2 += "."
+        }
+    } 
 }
 
 
 
-function calcular(){
-    calculo2 += calculo1
-    controle_calculo = false
 
-    atualizar()
+function calcular(condicional){
+    calculo1 = Number(calculo1)
+    calculo2 = Number(calculo2)
+    
+    switch(operacao){
+        case "+":
+            calculo1 = calculo1 + calculo2
+            break;
+
+        case "-":
+            calculo1 = calculo1 - calculo2
+            break;
+
+        case "x":
+            calculo1 = calculo1 * calculo2
+            break;
+
+        case "/":
+            if (calculo2 == 0){
+                calculo1 = "Resultado Indefinido"
+            }else{
+                calculo1 = calculo1 / calculo2
+            }
+            break;
+
+        case "%":
+            calculo1 = calculo1 % calculo2
+            calculo1 = calculo1.toFixed(3)
+            break;
+    }
+    calculo2 = ""
+    operacao = segurar_operacao
+
+    if (!condicional){
+        atualizar()
+    }else{
+        operacao = ""
+        atualizar()
+    }
 
 }
