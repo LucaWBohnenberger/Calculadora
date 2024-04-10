@@ -1,21 +1,15 @@
-function debug(){
-
-
-}
-
 calculo1 = ""
 calculo2 = ""
 operacao = ""
 segurar_operacao = ""
-mudar_sinal = ""
-
+igual = true
 
 function atualizar(){
     var mudar =  document.getElementById("numeros_pequenos")
     mudar.innerHTML = calculo1
     mudar.innerHTML += operacao
-    var mudar =  document.getElementById("numeros_grandes")
-    mudar.innerHTML = ""
+    var mudar1 =  document.getElementById("numeros_grandes")
+    mudar1.innerHTML = ""
 }
 
 
@@ -23,12 +17,10 @@ function addnumero(num){
     
     var mudar =  document.getElementById("numeros_grandes")
     if (operacao.length > 0){
+        segurar_operacao = ""
         calculo2 += String(num)
         mudar.innerHTML = calculo2
-        console.log("calculo2")
-        console.log(calculo2)
-        console.log(typeof calculo2)
-    }else{
+    }else if (igual){
         calculo1 += String(num)
         mudar.innerHTML = calculo1
         console.log(calculo1)
@@ -40,6 +32,7 @@ function apagar_tudo(){
     calculo1 = ""
     calculo2 = ""
     operacao = ""
+    igual = true
     atualizar()
 }
 
@@ -49,7 +42,7 @@ function addvezes(){
     operacao = "x"
     console.log(operacao.length)
     atualizar()
-    }else{
+    }else if (segurar_operacao == ""){
         segurar_operacao = "x"
         calcular(false)
     }
@@ -60,7 +53,7 @@ function adddiv(){
     habilitador = false
     operacao = "/"
     atualizar()
-    }else{
+    }else if (segurar_operacao == ""){
         segurar_operacao = "/"
         calcular(false)
     }
@@ -71,7 +64,7 @@ function addpercent(){
     habilitador = false
     operacao = "%"
     atualizar()
-    }else{
+    }else if (segurar_operacao == ""){
         segurar_operacao = "%"
         calcular(false)
     }
@@ -81,25 +74,40 @@ function addmais(){
     if(operacao.length == 0 & calculo1.length > 0){
     operacao = "+"
     atualizar()
-    }else{
+    }else if (segurar_operacao == ""){
         segurar_operacao = "+"
         calcular(false)
     }
 }
 
 function addmenos(){
-    if(operacao.length == 0 & calculo1.length != 0){
+    if(operacao.length == 0 & calculo1.length > 0){
     operacao = "-"
-    console.log(operacao)
+    }else if (segurar_operacao == ""){
+        segurar_operacao = "-"
+        calcular(false)
+    }
     atualizar()
-    }else if(calculo1.length == 0) {
-        calculo1 += "-"
+}
+
+function addsinal(){
+    if(operacao.length == 0){
+        if (calculo1.includes("-")){
+            calculo1 = calculo1.replace("-", "")
+        }else{
+            calculo1 = "-" + calculo1
+        }
         var mudar =  document.getElementById("numeros_grandes")
         mudar.innerHTML = calculo1
-    } else{
-        segurar_operacao = "-"
-        atualizar()
-        calcular(false)
+    
+    }else{
+        if (calculo2.includes("-")){
+            calculo2 = calculo2.replace("-", "")
+        }else{
+            calculo2 = "-" + calculo2
+        }
+        var mudar =  document.getElementById("numeros_grandes")
+        mudar.innerHTML = calculo2
     }
 }
 
@@ -115,7 +123,17 @@ function addponto(){
     } 
 }
 
-
+function remove(){
+    if (calculo2 != 0){
+        calculo2 = calculo2.slice(0, -1)
+        var mudar =  document.getElementById("numeros_grandes")
+        mudar.innerHTML = calculo2
+    }else{
+        calculo1 = calculo1.slice(0, -1)
+        var mudar =  document.getElementById("numeros_grandes")
+        mudar.innerHTML = calculo1
+    }
+}
 
 
 function calcular(condicional){
@@ -151,10 +169,12 @@ function calcular(condicional){
     calculo2 = ""
     operacao = segurar_operacao
 
+
     if (!condicional){
         atualizar()
     }else{
         operacao = ""
+        igual = false
         atualizar()
     }
 

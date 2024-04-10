@@ -10,38 +10,46 @@
 <body>
     <div class="calculadora">
         <div class="display">
-        <pre id="numeros_grandes">8963129</pre>
-        <pre id="numeros_pequenos">olha</pre>
+        <pre id="numeros_grandes"></pre>
+        <pre id="numeros_pequenos"></pre>
 
-
-        <form id="botoes" name="botoes" action="#">
+            <div class="botoes">
+            <div class="linha">
             <button class="botao" id="botaoAC" onclick="apagar_tudo()">AC</button>
-            <button class="botao" id="botaopa" onclick="">()</button>
+            <button class="botao" id="botaopa" onclick="addsinal()">+/-</button>
             <button class="botao" id="botaoper" onclick="addpercent()">%</button>
             <button class="botao" id="botaomais" onclick="addmais()">+</button>
-
+            </div>
+            
+            <div class="linha">
             <button class="botao" id="botao1" onclick="addnumero(1)" >1</button>
             <button class="botao" id="botao2" onclick="addnumero(2)" >2</button>
             <button class="botao" id="botao3" onclick="addnumero(3)" >3</button>
             <button class="botao" id="botaomenos" onclick="addmenos()" >-</button>
-
+            </div>
+            
+            <div class="linha">
             <button class="botao" id="botao4" onclick="addnumero(4)" >4</button>
             <button class="botao" id="botao5" onclick="addnumero(5)" >5</button>
             <button class="botao" id="botao6" onclick="addnumero(6)" >6</button>
             <button class="botao" id="botaoX" onclick="addvezes()" >X</button>
-
+            </div>
+            
+            <div class="linha">
             <button class="botao" id="botao7" onclick="addnumero(7)" >7</button>
             <button class="botao" id="botao8" onclick="addnumero(8)" >8</button>
             <button class="botao" id="botao9" onclick="addnumero(9)" >9</button>
             <button class="botao" id="botaodiv" onclick="adddiv()" >/</button>
-
-            <button class="botao" id="botaodelet" onclick="debug()">DEL</button>
+            </div>
+            
+            <div class="linha">
+            <button class="botao" id="botaodelet" onclick="remove()">DEL</button>
             <button class="botao" id="botao0" onclick="addnumero(0)" >0</button>
             <button class="botao" id="botaoponto" onclick="addponto()" >.</button>
             <button class="botao" id="botaoigual" onclick="calcular(true)">=</button>
-        </form>
-        </div>
-    </div>
+            </div>
+            <div>
+       
     <script src="index.js"></script>
 </body>
 </html>
