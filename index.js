@@ -16,7 +16,7 @@ function atualizar(){
 function addnumero(num){
     
     var mudar =  document.getElementById("numeros_grandes")
-    if (operacao.length > 0){
+    if (operacao.length == 1){
         segurar_operacao = ""
         calculo2 += String(num)
         mudar.innerHTML = calculo2
@@ -37,53 +37,51 @@ function apagar_tudo(){
 }
 
 function addvezes(){
-    console.log(operacao.length)
-    if(operacao.length == 0 & calculo1.length > 0){
+    if(operacao.length < 1 & calculo1.length > 0){
     operacao = "x"
-    console.log(operacao.length)
     atualizar()
-    }else if (segurar_operacao == ""){
+    }else if (segurar_operacao == "" & operacao.length < 3){
         segurar_operacao = "x"
         calcular(false)
     }
 }
 
 function adddiv(){
-    if(operacao.length == 0 & calculo1.length > 0){
+    if(operacao.length < 1 & calculo1.length > 0){
     habilitador = false
     operacao = "/"
     atualizar()
-    }else if (segurar_operacao == ""){
+    }else if (segurar_operacao == "" & operacao.length < 3){
         segurar_operacao = "/"
         calcular(false)
     }
 }
 
 function addpercent(){
-    if(operacao.length == 0 & calculo1.length > 0){
+    if(operacao.length < 1 & calculo1.length > 0){
     habilitador = false
     operacao = "%"
     atualizar()
-    }else if (segurar_operacao == ""){
+    }else if (segurar_operacao == "" & operacao.length < 3){
         segurar_operacao = "%"
         calcular(false)
     }
 }
 
 function addmais(){
-    if(operacao.length == 0 & calculo1.length > 0){
+    if(operacao.length < 1 & calculo1.length > 0){
     operacao = "+"
     atualizar()
-    }else if (segurar_operacao == ""){
+    }else if (segurar_operacao == "" & operacao.length < 3){
         segurar_operacao = "+"
         calcular(false)
     }
 }
 
 function addmenos(){
-    if(operacao.length == 0 & calculo1.length > 0){
+    if(operacao.length < 1 & calculo1.length > 0){
     operacao = "-"
-    }else if (segurar_operacao == ""){
+    }else if (segurar_operacao == "" & operacao.length < 3){
         segurar_operacao = "-"
         calcular(false)
     }
@@ -91,7 +89,7 @@ function addmenos(){
 }
 
 function addsinal(){
-    if(operacao.length == 0){
+    if(operacao.length == 0 && calculo1.length > 0){
         if (calculo1.includes("-")){
             calculo1 = calculo1.replace("-", "")
         }else{
@@ -100,7 +98,8 @@ function addsinal(){
         var mudar =  document.getElementById("numeros_grandes")
         mudar.innerHTML = calculo1
     
-    }else{
+    }else if(calculo1.length > 0){
+        console.log(operacao.length)
         if (calculo2.includes("-")){
             calculo2 = calculo2.replace("-", "")
         }else{
@@ -112,19 +111,19 @@ function addsinal(){
 }
 
 function addponto(){
-    if(operacao.length == 0){
-        if (!calculo1.includes(".")){
-            calculo1 += "."
-        }
-    } else{
+    if(operacao.length > 0 & calculo2 > 0){
         if (!calculo2.includes(".")){
             calculo2 += "."
+        }
+    } else if (operacao.length < 3 & calculo1 > 0){
+        if (!calculo1.includes(".")){
+            calculo1 += "."
         }
     } 
 }
 
 function remove(){
-    if (calculo2 != 0){
+    if (operacao.length > 0){
         calculo2 = calculo2.slice(0, -1)
         var mudar =  document.getElementById("numeros_grandes")
         mudar.innerHTML = calculo2
@@ -137,8 +136,9 @@ function remove(){
 
 
 function calcular(condicional){
-    calculo1 = Number(calculo1)
-    calculo2 = Number(calculo2)
+    if (calculo1 != "Resultado Indefinido"){
+        calculo1 = Number(calculo1)
+        calculo2 = Number(calculo2)
     
     switch(operacao){
         case "+":
@@ -167,15 +167,22 @@ function calcular(condicional){
             break;
     }
     calculo2 = ""
-    operacao = segurar_operacao
+    if (calculo1 == "Resultado Indefinido" || isNaN(calculo1) || calculo1 == "NaN" || calculo1 == "NaN-"){
+        calculo1 == "Resultado Indefinido"
+        operacao = "    "
+        console.log("opa")
+    }else{
+        operacao = segurar_operacao
+    }
+
 
 
     if (!condicional){
         atualizar()
     }else{
-        operacao = ""
         igual = false
         atualizar()
     }
 
+    }
 }
