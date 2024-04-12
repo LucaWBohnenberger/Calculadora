@@ -23,12 +23,10 @@ function addnumero(num){
     }
 }
 
-
 function apagar_tudo(){
     calculo1 = ""
     calculo2 = ""
     operacao = ""
-    igual = true
     atualizar()
 }
 
@@ -103,11 +101,11 @@ function addsinal(){
 
 function addponto(){
     if(operacao.length > 0 & calculo2 > 0){
-        if (!calculo2.includes(".")){
+        if (!calculo2.includes(".") & calculo2.length < 10){
             calculo2 += "."
         }
     } else if (operacao.length < 3 & calculo1 > 0){
-        if (!calculo1.includes(".")){
+        if (!calculo1.includes(".") & calculo1.length < 10){
             calculo1 += "."
         }
     } 
